@@ -1,1 +1,1 @@
-’‚ «Laravel5.1.10≥Ã–Ú°£
+This is Laravel5.1.*
