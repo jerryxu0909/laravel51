@@ -1,12 +1,11 @@
-@extends('layouts.app')
-
+@extends('app')  
 @section('content')
 <div class="container">
     <div class="col-sm-offset-2 col-sm-8">    
         <div class="panel panel-default">
          <div class="col-sm-offset-3 col-sm-6">
                 
-                    <a href="{{ url('/group/add')}}">Add Task</a> 
+                    <a href="{{ url('/group/add')}}">增加</a> 
                 
             </div>
             <div class="panel-heading">
@@ -31,9 +30,8 @@
                                 <form action="/group/{{ $vo->id }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
-
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="fa fa-btn fa-trash"></i>Delete
+                                     <button type="submit" class="btn btn-danger" title="删除">
+                                        <i class="fa fa-btn fa-trash"></i> 删除
                                     </button>
                                 </form>
                             </td>

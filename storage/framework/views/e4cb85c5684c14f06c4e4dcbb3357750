@@ -1,13 +1,13 @@
 <?php if(count($errors) > 0): ?>
     <!-- Form Error List -->
     <div class="alert alert-danger">
-        <strong>哎哟! 您的输入有误!</strong>
+        <strong>对不起,您的输入有误!</strong>
 
         <br><br>
 
         <ul>
             <?php foreach($errors->all() as $error): ?>
-                <li><?php echo e($error); ?></li>
+                <li><?php echo e(trans($error)); ?></li>
             <?php endforeach; ?>
         </ul>
     </div>

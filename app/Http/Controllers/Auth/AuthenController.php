@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use Validator;
+use Auth;
+
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use Auth;
+
 use Illuminate\Support\Facades\Input;
 
 /**
@@ -15,8 +17,13 @@ use Illuminate\Support\Facades\Input;
 */
 class AuthenController extends Controller
 {
-    
-     public function getLogin()
+    //默认1分钟只能登录5交次
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
+    protected $redirectPath = '/home';
+    protected $loginPath = '/login';
+
+    public function getLogin()
     {
         if (view()->exists('auth.authenticate')) {
             return view('auth.authenticate');
@@ -31,11 +38,22 @@ class AuthenController extends Controller
     */
     public function authenticate()
     {
-        $name = Input::get("name");
-        $password = Input::get("password");
-        if (Auth::attempt(['name' => $name, 'password' => $password, 'status'=>1])) {
+        $data['name'] = Input::get("name");
+        $data['password'] = Input::get("password");   
+        
+        //$throttles = $this->isUsingThrottlesLoginsTrait();
+//        if ($throttles && $this->hasTooManyLoginAttempts()){
+//            return $this->sendLockoutResponse($request);
+//        }
+        
+        if (Auth::once($data)){
+            //
+        }
+        
+
+        if (Auth::attempt(['name' => $data['name'], 'password' => $data['password'], 'status'=>1])) {
             // 认证通过...
-            return redirect()->intended('home');
+            return redirect()->intended("/home");
         }   else {
             return redirect()->back()->withInput()->withErrors('用户名或密码错误！');
         }

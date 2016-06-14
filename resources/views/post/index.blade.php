@@ -29,16 +29,16 @@
                             <td>
 
                                 <a href="{{route('post.edit',['id'=>$vo->id])}}">修改</a> &nbsp;&nbsp;&nbsp;&nbsp;  
-                                <a href="{{ url('/postdestory',['id'=>$vo->id])}}">删除</a>
-                                <form action="/post" method="POST">
+                                <a href="{{ url('/postdestory',['id'=>$vo->id])}}" title="软删除">删除</a>
+
+                                <form action="/post/{{ $vo->id }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 
-                                    <button type="submit" class="btn btn-danger">
-                                        删除
+                                    <button type="submit" class="btn btn-danger" title="删除">
+                                        <i class="fa fa-btn fa-trash"></i>
                                     </button>
                                 </form>
-
                             </td>
                         </tr>
                         @endforeach

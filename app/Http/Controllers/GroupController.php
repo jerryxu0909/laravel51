@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use App\Http\Controllers\Auth\Validator;
-use Validator;
+use Validator;   
+use DB;
+
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -15,8 +16,10 @@ use Illuminate\Support\Facades\Input;
 class GroupController extends Controller
 {
     public function index(){
-        $group = Group::all();
-        
+        $group = Group::orderBy('updated_at','desc')->get();
+        //        $group = DB::table('groups')->paginate(15);
+
+
         return view('group.index', [
             'list' => $group
         ]); 
@@ -55,15 +58,17 @@ class GroupController extends Controller
     }
 
     public function store(Request $request) {
-      //  $validator = validator($request->all(), [
-//            'title' => 'required|max:10',
-//        ]);
-//
-//        if ($validator->fails()) {
-//            return redirect('/group')
-//            ->withInput()
-//            ->withErrors($validator);
-//        }
+
+        //        $this->Valide($request);
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:posts|min:3|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('group/add')
+            ->withErrors($validator)
+            ->withInput();
+        }
 
         $id = Input::get("id");
         $title = Input::get("title");  
@@ -81,5 +86,25 @@ class GroupController extends Controller
         } else {
             return redirect()->back()->withInput()->withErrors('操作失败！');
         }
+    }
+
+
+    private function Valide(Request $request) {
+        $this->validate($request, [
+            'title' => 'required|unique:posts|min:3|max:255',
+        ]);
+    }
+
+    private function MyValide(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:posts|min:3|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('group/add')
+            ->withErrors($validator)
+            ->withInput();
+        }
+
     }
 }

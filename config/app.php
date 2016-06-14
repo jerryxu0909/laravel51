@@ -39,7 +39,7 @@ return [
     |
     */
 
-   'timezone' => 'Asia/Shanghai', //默认UTC
+    'timezone' => 'Asia/Shanghai', //默认UTC
 
     /*
     |--------------------------------------------------------------------------
@@ -111,8 +111,8 @@ return [
     'providers' => [
 
         /*
-         * Laravel Framework Service Providers...
-         */
+        * Laravel Framework Service Providers...
+        */
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -138,12 +138,23 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Application Service Providers...
-         */
+        * Application Service Providers...
+        */
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-	    Barryvdh\Debugbar\ServiceProvider::class,
+        //add by xugp 2016-06-11
+        App\Providers\TestServiceProvider::class,
+
+        //debug工具栏
+        Barryvdh\Debugbar\ServiceProvider::class,
+
+        //Laravel 5 CRUD Generator
+        Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        
+        //
+        InfyOm\GeneratorBuilder\GeneratorBuilderServiceProvider::class,
 
     ],
 
@@ -192,6 +203,10 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+
+        //Laravel 5 CRUD Generator
+        'Form'      => Collective\Html\FormFacade::class,
+        'HTML'      => Collective\Html\HtmlFacade::class,
 
     ],
 

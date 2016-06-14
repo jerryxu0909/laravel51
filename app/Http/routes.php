@@ -11,35 +11,26 @@
 |
 */
 
+require __DIR__.'/Routes/admin.php';
+require __DIR__.'/Routes/home.php';
+require __DIR__.'/Routes/test.php';
+
 Route::get('/', function () {
-    return view('welcome');
+    $list = App\Model\Demo::all();
+    return view('welcome', ['list' => $list]);
 });
 Route::get('/home', function () {
-    return view('home');
+    $list = App\Model\Demo::all();
+    return view('home', ['list' => $list]);
 });
+ 
+//首页
+Route::get('/', 'HomeController@index');
 
-//通过邮件验证登录
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
-//通过用户名验证登录
-Route::get('authen/login', 'Auth\AuthenController@getLogin');
-Route::post('authen/login', 'Auth\AuthenController@authenticate');
 
-Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
-Route::post('password/reset', 'Auth\PasswordController@postReset');
-//Group相关=====================
-Route::get('/group', 'GroupController@index');
-Route::get('/group/add', 'GroupController@add');
-Route::delete('/group/{id}', 'GroupController@delete');
-Route::get('/group/{id}', 'GroupController@edit');
-Route::post('/group', 'GroupController@store') ;
+Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder');
 
-//创建RESTFul风格的路由控制器
-Route::resource('post', 'PostController'); 
-Route::get('/postdestory/{id}', 'PostController@destroy');  
-Route::get('/posttest', 'PostController@test');
+Route::get('field_template', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@fieldTemplate');
 
-//Member相关
-Route::resource('member', 'MemberContorller');
+Route::post('generator_builder/generate', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generate');

@@ -9,14 +9,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 
 use App\Model\Post;
-use App\Repositories\PostRepository as PostRep;
+use App\Repositories\PostRepository as Repository; 
+use App\Repositories\Criteria\Post\Status;
 
 class PostController extends Controller
 {
-    private $pr;
-    public function __construct(PostRep $postReq) {
+    private $model;
+    public function __construct(Repository $rep) {
 
-        $this->pr = $postReq;
+        $this->model = $rep;
     }
     /**
     * Display a listing of the resource.
@@ -139,6 +140,7 @@ CREATE;
     *
     * @param  int  $id
     * @return Response
+    * 软删除
     */
     public function destroy($id)
     {
@@ -158,11 +160,15 @@ CREATE;
         //        $data = Post::find(1);
         //        $data = $this->pr->all();
         //        $data = $this->pr->find(2, ['id', 'title','content']);
-        $data = $this->pr->findBy('content', '9',['id', 'title','content']);
-        $data = $this->pr->findAllBy('content', '9',['id', 'title','content']);
-        $data = $this->pr->findWhere(['id'=>'2',['user_id','<',16]],['id', 'title','content']);
+        $st = new Status;
+        $this->model->pushCriteria($st);
+//        $data = $this->model->all();
+       // $data = $this->model->findBy('content', '9',['id', 'title','content']);
+//        $data = $this->model->findAllBy('content', '9',['id', 'title','content']);
+        $data = $this->model->findWhere(['id'=>'2',['user_id','<',16]],['id', 'title','content']);
 //        dd($data);
-        return response()->json($data);
+        return view('group.index', ['list'=>$data]);
+        //return response()->json($data);
     }
 
     private function Valide(Request $request) {

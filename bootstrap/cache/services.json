@@ -26,7 +26,11 @@
         "App\\Providers\\AppServiceProvider",
         "App\\Providers\\EventServiceProvider",
         "App\\Providers\\RouteServiceProvider",
-        "Barryvdh\\Debugbar\\ServiceProvider"
+        "App\\Providers\\TestServiceProvider",
+        "Barryvdh\\Debugbar\\ServiceProvider",
+        "Appzcoder\\CrudGenerator\\CrudGeneratorServiceProvider",
+        "Collective\\Html\\HtmlServiceProvider",
+        "InfyOm\\GeneratorBuilder\\GeneratorBuilderServiceProvider"
     ],
     "eager": [
         "Illuminate\\Auth\\AuthServiceProvider",
@@ -43,7 +47,10 @@
         "App\\Providers\\AppServiceProvider",
         "App\\Providers\\EventServiceProvider",
         "App\\Providers\\RouteServiceProvider",
-        "Barryvdh\\Debugbar\\ServiceProvider"
+        "App\\Providers\\TestServiceProvider",
+        "Barryvdh\\Debugbar\\ServiceProvider",
+        "Appzcoder\\CrudGenerator\\CrudGeneratorServiceProvider",
+        "InfyOm\\GeneratorBuilder\\GeneratorBuilderServiceProvider"
     ],
     "deferred": {
         "command.app.name": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
@@ -129,7 +136,11 @@
         "auth.password": "Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider",
         "auth.password.tokens": "Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider",
         "translator": "Illuminate\\Translation\\TranslationServiceProvider",
-        "translation.loader": "Illuminate\\Translation\\TranslationServiceProvider"
+        "translation.loader": "Illuminate\\Translation\\TranslationServiceProvider",
+        "html": "Collective\\Html\\HtmlServiceProvider",
+        "form": "Collective\\Html\\HtmlServiceProvider",
+        "Collective\\Html\\HtmlBuilder": "Collective\\Html\\HtmlServiceProvider",
+        "Collective\\Html\\FormBuilder": "Collective\\Html\\HtmlServiceProvider"
     },
     "when": {
         "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider": [],
@@ -143,6 +154,7 @@
         "Illuminate\\Queue\\QueueServiceProvider": [],
         "Illuminate\\Redis\\RedisServiceProvider": [],
         "Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider": [],
-        "Illuminate\\Translation\\TranslationServiceProvider": []
+        "Illuminate\\Translation\\TranslationServiceProvider": [],
+        "Collective\\Html\\HtmlServiceProvider": []
     }
 }
